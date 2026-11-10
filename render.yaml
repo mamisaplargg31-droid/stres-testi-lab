@@ -1,9 +1,1 @@
-services:
-  - type: web
-    name: stres-testi-lab
-    runtime: python
-    buildCommand: ""
-    startCommand: "python app.py"
-    envVars:
-      - key: PORT
-        value: "8080"
+
