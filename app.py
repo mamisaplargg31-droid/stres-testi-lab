@@ -25,4 +25,13 @@ def run():
     httpd.serve_forever()
 
 if __name__ == '__main__':
-    run()
+    run()import os  # Kodun en üstüne ekleyin
+
+def run():
+    # Render'ın atadığı portu otomatik al, bulamazsa 10000 portunu kullan
+    port = int(os.environ.get("PORT", 10000))
+    server_address = ('', port)
+    httpd = HTTPServer(server_address, TestServer)
+    print(f"Port {port} dinleniyor...")
+    httpd.serve_forever()
+
