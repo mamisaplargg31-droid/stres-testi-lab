@@ -1,37 +1,23 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import math
+import os
 
 class TestServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        # ─── SUNUCUYU BİLEREK YORAN STRATEJİK KOD ───
-        # Her ziyaretçide arka planda ağır bir matematik hesabı döndürüyoruz.
-        # Bu sayede stres testi aracı yüklendiğinde sunucu işlemcisi (CPU) 
-        # hızla tıkanacak ve gerçek bir siber saldırı etkisi yaratacaktır.
-        Agir_hesaplama = 0
-        for i in range(500000):
-            agir_hesaplama += math.sqrt(i)
+        # İşlemciyi test etmek için matematik döngüsü
+        hesaplama = 0
+        for i in range(100000):
+            hesaplama += math.sqrt(i)
 
-        # ─── ZİYARETÇİYE GÖNDERİLEN YANIT ───
         self.send_response(200)
         self.send_header("Content-type", "text/plain; charset=utf-8")
         self.end_headers()
-        self.wfile.write("🤖 Siber Güvenlik Test Laboratuvarı Aktif!\n".encode("utf-8"))
-
-# Sitenin yerel bilgisayarınızda çalışacağı port (Varsayılan: 8080)
-def run():
-    server_address = ('', 8080)
-    httpd = HTTPServer(server_address, TestServer)
-    print("🚀 Test sitesi kodları hazır! Port 8080 dinleniyor...")
-    httpd.serve_forever()
+        self.wfile.write("🚀 Test Sunucusu Aktif!\n".encode("utf-8"))
 
 if __name__ == '__main__':
-    run()import os  # Kodun en üstüne ekleyin
-
-def run():
-    # Render'ın atadığı portu otomatik al, bulamazsa 10000 portunu kullan
+    # Render'ın atadığı portu otomatik yakalar (Bulamazsa 10000 kullanır)
     port = int(os.environ.get("PORT", 10000))
     server_address = ('', port)
     httpd = HTTPServer(server_address, TestServer)
-    print(f"Port {port} dinleniyor...")
+    print(f"Sunucu aktif, port {port} dinleniyor...")
     httpd.serve_forever()
-
