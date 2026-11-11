@@ -16,7 +16,7 @@ class TestServer(BaseHTTPRequestHandler):
 
 if __name__ == '__main__':
     # Render'ın atadığı portu otomatik yakalar (Bulamazsa 10000 kullanır)
-    port = int(os.environ.get("PORT", 18012))
+    port = int(os.environ.get("PORT", 10000))
     server_address = ('', port)
     httpd = HTTPServer(server_address, TestServer)
     print(f"Sunucu aktif, port {port} dinleniyor...")
